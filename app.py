@@ -639,6 +639,6 @@ st.caption(
 )
 
 st.caption(
-    f"Developed by {DEVELOPER}"
+    f"Developed by {DEVELOPER}| NestorBird Engineering Internship Assignment | © 2026"
 )
     
