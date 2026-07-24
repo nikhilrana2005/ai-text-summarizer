@@ -1,14 +1,14 @@
 """
-AI Service
+ai_service.py
 
-This module handles communication with the Groq API.
+Handles communication with the Groq API
+to generate AI-powered summaries.
 
-Responsibilities:
-- Clean user input
-- Select the correct system prompt
-- Send request to Groq
-- Return the generated summary
-- Handle API errors gracefully
+Developer:
+    Nikhil Rana
+
+Project:
+    NestorBird Engineering Internship Assignment
 """
 
 from groq import Groq
@@ -20,46 +20,39 @@ from config import (
     MAX_TOKENS,
 )
 
-from prompts import SUMMARY_PROMPTS
-
-from utils import clean_text
-
-
-
-
-client = Groq(
-    api_key=GROQ_API_KEY
+from prompts import (
+    SYSTEM_PROMPT,
+    build_prompt,
 )
 
 
 
 
-def generate_summary(
-    user_text: str,
-    summary_style: str,
-) -> str:
-    """
-    Generate an AI summary using the selected summary style.
+client = Groq(
+    api_key=GROQ_API_KEY,
+)
 
-    Args:
-        user_text:
+
+
+def generate_summary(user_text, summary_style):
+    """
+    Generate a summary using the Groq API.
+
+    Parameters:
+        user_text (str):
             Text entered by the user.
 
-        summary_style:
-            Standard
-            Short
-            Detailed
-            Executive
+        summary_style (str):
+            Selected summary style.
 
     Returns:
-        AI-generated summary.
+        str:
+            AI-generated summary.
     """
 
-    cleaned_text = clean_text(user_text)
-
-    system_prompt = SUMMARY_PROMPTS.get(
-        summary_style,
-        SUMMARY_PROMPTS["Standard"],
+    prompt = build_prompt(
+        user_text=user_text,
+        summary_style=summary_style,
     )
 
     try:
@@ -72,12 +65,12 @@ def generate_summary(
 
                 {
                     "role": "system",
-                    "content": system_prompt,
+                    "content": SYSTEM_PROMPT,
                 },
 
                 {
                     "role": "user",
-                    "content": cleaned_text,
+                    "content": prompt,
                 },
 
             ],
@@ -100,10 +93,6 @@ def generate_summary(
 
     except Exception as error:
 
-        raise RuntimeError(
-
-            "Unable to connect to the AI service. "
-            "Please check your internet connection "
-            "or try again in a few moments."
-
-        ) from error
+        raise Exception(
+            f"Failed to generate summary.\n{error}"
+        )

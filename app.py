@@ -1,16 +1,17 @@
 """
+app.py
+
 AI Text Summarizer
 
-A professional Streamlit application that summarizes
-long text into exactly three bullet points using Groq AI.
+A professional AI-powered web application that summarizes
+long-form text into exactly three concise bullet points.
 
 Developer:
-Nikhil Rana
+    Nikhil Rana
 
 Project:
-NestorBird Engineering Internship Assignment
+    NestorBird Engineering Internship Assignment
 """
-
 
 import time
 
@@ -31,6 +32,8 @@ from config import (
     APP_NAME,
     APP_VERSION,
     DEVELOPER,
+    MODEL_NAME,
+    AI_PROVIDER,
     MAX_CHARACTERS,
     MIN_WORDS,
     SUMMARY_STYLES,
@@ -41,10 +44,11 @@ from config import (
 
 st.set_page_config(
     page_title=APP_NAME,
-    page_icon="🤖",
+    page_icon="📝",
     layout="wide",
     initial_sidebar_state="expanded",
 )
+
 
 
 with st.sidebar:
@@ -52,13 +56,13 @@ with st.sidebar:
     st.title("🤖 AI Text Summarizer")
 
     st.caption(
-        "Powered by Groq • Llama 3.3 70B"
+        f"Powered by {AI_PROVIDER} • {MODEL_NAME}"
     )
 
     st.markdown("---")
 
     page = st.radio(
-        "Navigation",
+        "📂 Navigation",
         (
             "🏠 Home",
             "ℹ️ About",
@@ -71,20 +75,20 @@ with st.sidebar:
     st.subheader("🛠 Technology Stack")
 
     st.markdown("""
-- 🐍 Python
+- 🐍 Python 3.12.10
 - ⚡ Streamlit
 - 🤖 Groq API
-- 🧠 Llama 3.3
+- 🧠 llama-3.3-70b-versatile
 """)
 
     st.markdown("---")
 
-    st.subheader("🤖 AI Configuration")
+    st.subheader("⚙ AI Configuration")
 
-    st.info("""
-**Model:** Llama 3.3 70B
+    st.info(f"""
+**Provider:** {AI_PROVIDER}
 
-**Provider:** Groq
+**Model:** {MODEL_NAME}
 
 **Temperature:** 0.3
 
@@ -93,25 +97,27 @@ with st.sidebar:
 
     st.markdown("---")
 
-    st.subheader("✨ Application Features")
+    st.subheader("✨ Features")
 
     st.markdown("""
 - AI-powered text summarization
 - Four summary styles
-- Word & character counter
 - Reading time estimation
 - Compression analysis
-- Reading time saved
 - Download summary
-- Clean & responsive UI
+- Session history
 """)
 
     st.markdown("---")
 
+    st.success("🚀 Internship Project")
+
     st.caption(f"Version {APP_VERSION}")
 
     st.caption(f"Developed by {DEVELOPER}")
-    
+
+
+
 
 if page == "ℹ️ About":
 
@@ -119,38 +125,39 @@ if page == "ℹ️ About":
 
     st.write(
         """
-The AI Text Summarizer is a professional web application
+AI Text Summarizer is a beginner-friendly AI application
 developed using Python, Streamlit, and the Groq API.
 
-It converts lengthy articles, reports, meeting notes,
-blogs, and study material into concise summaries
-containing exactly three bullet points.
+It converts lengthy text into exactly three meaningful
+bullet points using the powerful
+**llama-3.3-70b-versatile** language model.
 
-This project demonstrates:
+The project demonstrates:
 
 • AI API Integration
 
 • Prompt Engineering
 
-• Clean Code Architecture
-
 • Modular Python Programming
 
-• Professional UI Design
+• Clean Code Structure
+
+• Input Validation
 
 • Error Handling
 
-• Input Validation
+• Interactive User Interface
 """
     )
 
     st.success(
-        "Designed for the NestorBird Engineering Internship Assignment."
+        "Developed for the NestorBird Engineering Internship Assignment."
     )
 
     st.stop()
-    
- 
+
+
+
 
 if page == "📖 How To Use":
 
@@ -159,14 +166,13 @@ if page == "📖 How To Use":
     st.markdown("""
 ### Step 1
 
-Choose your preferred summary style.
+Select a summary style.
 
 ---
 
 ### Step 2
 
-Paste your article, report,
-meeting notes, or any paragraph.
+Paste your text into the input box.
 
 ---
 
@@ -178,127 +184,141 @@ Click **Generate AI Summary**.
 
 ### Step 4
 
-Wait a few seconds while
-the AI processes your text.
+Wait while the AI processes your content.
 
 ---
 
 ### Step 5
 
-Review the generated summary
-and download it if needed.
+Read or download the generated summary.
 """)
 
     st.info(
-        "💡 Tip: Well-structured input generally produces better summaries."
+        "💡 Better input usually produces better summaries."
     )
 
     st.stop()
-    
+
+
 
 
 st.title("📝 AI Text Summarizer")
 
 st.caption(
-    "Transform lengthy text into concise, AI-powered summaries in just a few seconds."
+    "Summarize long-form text into exactly three meaningful bullet points using Artificial Intelligence."
 )
 
 st.markdown("---")
-
-
-
 
 left_column, right_column = st.columns([3, 1])
 
 with left_column:
 
-    st.subheader("Generate Smart Summaries with AI")
+    st.subheader("Generate Smart Summaries")
 
     st.write(
-        """
-Whether you're reading a news article, research paper,
-meeting notes, blog, or documentation,
-this application helps you quickly understand
-the most important information.
+        f"""
+This application uses **{MODEL_NAME}**
+through the **{AI_PROVIDER} API**
+to summarize articles, reports,
+blogs, meeting notes, research papers,
+and other long-form content.
 
-Powered by the Groq API and the Llama 3.3 language model,
-the application generates concise summaries in exactly
-three bullet points while preserving the key meaning
-of the original text.
+The generated summary always contains
+exactly three concise bullet points while
+preserving the main ideas of the original text.
 """
     )
 
+with right_column:
+
+    st.info(f"""
+### 🤖 AI Information
+
+**Provider**
+
+{AI_PROVIDER}
+
+**Model**
+
+{MODEL_NAME}
+
+**Output**
+
+Exactly 3 Bullet Points
+""")
 
 st.markdown("---")
 
 
 
 if "user_text" not in st.session_state:
-
     st.session_state.user_text = ""
 
-
 if "summary" not in st.session_state:
-
     st.session_state.summary = ""
 
-
 if "history" not in st.session_state:
-
     st.session_state.history = []
 
-
 if "processing_time" not in st.session_state:
-
     st.session_state.processing_time = 0
-    
+
 
 st.subheader("⚙️ Summary Settings")
 
 summary_style = st.selectbox(
-    "Choose Summary Style",
-    SUMMARY_STYLES,
-    help="Select how detailed you want the generated summary to be.",
+    label="Choose Summary Style",
+    options=SUMMARY_STYLES,
+    index=0,
+    help="Select how you want the AI to summarize your text.",
 )
 
 st.info(
     """
-### Summary Style Guide
+### 📌 Summary Styles
 
-**Standard** → Balanced summary for general use.
+**Standard**
+- Balanced summary for everyday use.
 
-**Short** → Very concise summary with only the essential points.
+**Short**
+- Focuses only on the most important information.
 
-**Detailed** → Includes more context while keeping exactly three bullets.
+**Detailed**
+- Includes extra context while keeping exactly three bullet points.
 
-**Executive** → Business-oriented summary highlighting key insights and decisions.
+**Executive**
+- Best for business reports and professional documents.
 """
 )
 
 st.markdown("---")
 
+
+
 st.subheader("📝 Enter Your Text")
 
 st.caption(
-    "Paste an article, report, research paper, blog, meeting notes, or any paragraph below."
+    "Paste your article, report, research paper, meeting notes, "
+    "blog, or any long-form content below."
 )
 
 user_text = st.text_area(
     label="",
     value=st.session_state.user_text,
-    height=100,
+    height=220,
     placeholder="""
-Example:
-
-• News Article
+Examples
 
 • Research Paper
+
+• News Article
 
 • Meeting Notes
 
 • Blog Post
 
-• Study Material
+• Business Report
 
 Paste your content here...
 """,
@@ -307,13 +327,12 @@ Paste your content here...
 if not user_text:
 
     st.info(
-        "👆 Paste your content above and click **Generate AI Summary** to begin."
+        "👆 Paste your text above to get started."
     )
-    
-
-
 
 st.markdown("---")
+
+
 
 st.subheader("📊 Text Statistics")
 
@@ -323,62 +342,91 @@ total_characters = count_characters(user_text)
 
 reading_time = estimate_reading_time(user_text)
 
-metric1, metric2, metric3 = st.columns(3)
+col1, col2, col3 = st.columns(3)
 
-with metric1:
-
-    st.metric(
-        label="📝 Total Words",
-        value=total_words,
-    )
-
-with metric2:
+with col1:
 
     st.metric(
-        label="🔠 Characters",
-        value=total_characters,
+        "📝 Total Words",
+        total_words,
     )
 
-with metric3:
+with col2:
 
     st.metric(
-        label="⏱ Estimated Reading Time",
-        value=f"{reading_time} min",
+        "🔠 Characters",
+        total_characters,
+    )
+
+with col3:
+
+    st.metric(
+        "⏱ Reading Time",
+        f"{reading_time} min",
     )
 
 
+usage = total_characters / MAX_CHARACTERS
 
+st.subheader("📈 Character Usage")
 
-usage = (
-    total_characters /
-    MAX_CHARACTERS
+st.progress(min(usage, 1.0))
+
+st.caption(
+    f"{total_characters:,} / {MAX_CHARACTERS:,} characters used"
 )
 
 if usage >= 0.90:
 
     st.warning(
-        "⚠️ You are approaching the maximum character limit."
+        "⚠️ You are close to the maximum character limit."
     )
 
+elif usage >= 0.70:
+
+    st.info(
+        "ℹ️ Your text is getting close to the maximum limit."
+    )
+
+st.markdown("---")
 
 
-st.markdown("### 🎯 Input Quality")
+
+st.subheader("🎯 Input Quality")
 
 if total_words == 0:
 
     st.info(
-        "Waiting for input..."
+        "Waiting for your input..."
     )
 
+elif total_words < MIN_WORDS:
 
+    st.warning(
+        f"Please enter at least {MIN_WORDS} words."
+    )
+
+elif total_words <= 50:
+
+    st.info(
+        "Short input detected. The summary may contain limited details."
+    )
+
+elif total_words <= 200:
+
+    st.success(
+        "Good input. The AI has enough context to generate a useful summary."
+    )
 
 else:
 
     st.success(
-        "Excellent input. The AI has sufficient context to generate a detailed summary."
+        "Excellent input. The AI has enough context to generate a high-quality summary."
     )
 
 st.markdown("---")
+
+
 
 button1, button2 = st.columns(2)
 
@@ -386,8 +434,8 @@ with button1:
 
     generate = st.button(
         "🚀 Generate AI Summary",
-        use_container_width=True,
         type="primary",
+        use_container_width=True,
     )
 
 with button2:
@@ -396,7 +444,16 @@ with button2:
         "🧹 Clear Text",
         use_container_width=True,
     )
-    
+
+if clear:
+
+    st.session_state.user_text = ""
+    st.session_state.summary = ""
+
+    st.rerun()
+
+st.markdown("---")
+
 
 if generate:
 
@@ -409,7 +466,6 @@ if generate:
     if validation_message:
 
         st.warning(validation_message)
-
         st.stop()
 
     start_time = time.time()
@@ -417,12 +473,12 @@ if generate:
     try:
 
         with st.spinner(
-            "🤖 AI is analyzing your text and preparing the best possible summary..."
+            "🤖 AI is analyzing your text..."
         ):
 
             summary = generate_summary(
-                user_text,
-                summary_style,
+                user_text=user_text,
+                summary_style=summary_style,
             )
 
         end_time = time.time()
@@ -433,7 +489,6 @@ if generate:
         )
 
         st.session_state.summary = summary
-
         st.session_state.user_text = user_text
 
         st.session_state.history.insert(
@@ -448,41 +503,25 @@ if generate:
     except Exception as error:
 
         st.error(
-            f"❌ {error}"
+            "❌ Failed to generate summary."
         )
+
+        st.exception(error)
 
 
 
 if not st.session_state.summary:
 
     st.info(
-        "👆 Your generated summary will appear here."
+        "👆 Your AI-generated summary will appear here."
     )
-    
+
 
 
 if st.session_state.summary:
 
     st.success(
-        "✅ Summary generated successfully. Review the results below."
-    )
-    
-if st.session_state.summary:
-
-    st.success(...)
-
-    st.subheader(...)
-
-    st.markdown(...)
-    
-
-
-if st.session_state.summary:
-
-    st.markdown("---")
-
-    st.success(
-        "✅ Your AI summary is ready!"
+        "✅ Summary generated successfully."
     )
 
     st.subheader("📄 AI Generated Summary")
@@ -490,24 +529,28 @@ if st.session_state.summary:
     st.markdown(
         st.session_state.summary
     )
-    
+
+    st.markdown("---")
+
+
+
+if st.session_state.summary:
+
     summary_words = count_words(
         st.session_state.summary
     )
 
     compression = calculate_compression(
-        user_text,
+        st.session_state.user_text,
         st.session_state.summary,
     )
 
     saved_time = reading_time_saved(
-        user_text,
+        st.session_state.user_text,
         st.session_state.summary,
     )
 
-
-
-    st.markdown("### 📊 Summary Analytics")
+    st.subheader("📊 Summary Analytics")
 
     col1, col2, col3, col4 = st.columns(4)
 
@@ -522,135 +565,68 @@ if st.session_state.summary:
 
         st.metric(
             "📉 Compression",
-            f"{compression}%"
+            f"{compression}%",
         )
 
     with col3:
 
         st.metric(
-            "⏱ Time Saved",
-            f"{saved_time} min"
+            "⏱ Reading Time Saved",
+            f"{saved_time} min",
         )
 
     with col4:
 
         st.metric(
-            "⚡ AI Response",
-            f"{st.session_state.processing_time} sec"
+            "⚡ Response Time",
+            f"{st.session_state.processing_time} sec",
         )
-        
 
-
-    st.download_button(
-
-        label="📥 Download Summary",
-
-        data=st.session_state.summary,
-
-        file_name="AI_Text_Summary.txt",
-
-        mime="text/plain",
-
-        use_container_width=True,
-    )
+    st.markdown("---")
 
 
 
-    if compression >= 70:
+if st.session_state.summary:
+
+    st.subheader("🤖 AI Performance")
+
+    if compression >= 80:
 
         st.success(
-            "🎯 Excellent compression while preserving the key information."
+            "Excellent summarization with high compression while preserving key information."
         )
 
-    elif compression >= 50:
+    elif compression >= 60:
+
+        st.success(
+            "The summary provides a good balance between detail and readability."
+        )
+
+    elif compression >= 40:
 
         st.info(
-            "👍 Good balance between detail and brevity."
+            "The summary includes additional context for better understanding."
         )
 
     else:
 
         st.warning(
-            "ℹ️ The generated summary is relatively detailed."
+            "The summary is relatively detailed because the original text required more context."
         )
-        
-
-
-    if st.session_state.history:
-
-        st.markdown("---")
-
-        st.subheader("🕒 Recent Summaries")
-
-        for index, item in enumerate(
-            st.session_state.history,
-            start=1,
-        ):
-
-            with st.expander(
-                f"Summary {index}"
-            ):
-
-                st.markdown(item)
-                
-st.markdown("---")
-
-st.subheader("📊 Project Statistics")
-
-st.write(f"📝 Current Words: {count_words(st.session_state.user_text)}")
-
-st.write(f"📄 Summaries Generated: {len(st.session_state.history)}")
-
-st.write(f"⚙ Version: {APP_VERSION}")
-
-
-if st.session_state.history:
 
     st.markdown("---")
 
-    st.subheader("🕒 Recent Summaries")
 
-    for index, summary in enumerate(
-        st.session_state.history,
-        start=1,
-    ):
 
-        with st.expander(
-            f"Summary {index}"
-        ):
+if st.session_state.summary:
 
-            st.markdown(summary)
-
-else:
-
-    st.info(
-        "No summaries generated yet."
+    st.download_button(
+        label="📥 Download Summary",
+        data=st.session_state.summary,
+        file_name="AI_Text_Summary.txt",
+        mime="text/plain",
+        use_container_width=True,
     )
 
-st.markdown("---")
-
-st.markdown(
-"""
-### 👨‍💻 Developer
-
-**Nikhil Rana**
-
-AI Text Summarizer developed using:
-
-- Python
-- Streamlit
-- Groq API
-- Llama 3.3 70B
-
-This project was created as part of the
-**NestorBird Engineering Internship Assignment (2026).**
-"""
-)
-
-st.caption(
-    f"{APP_NAME} • Version {APP_VERSION}"
-)
-
-st.caption(
-    "© 2026 Nikhil Rana. All Rights Reserved."
-)
+    st.markdown("---")
+    

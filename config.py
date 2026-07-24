@@ -1,9 +1,14 @@
 """
-Application Configuration
+config.py
 
-This module contains all application constants,
-AI model settings, validation limits, and
-environment variables used across the project.
+Application configuration settings for the
+AI Text Summarizer project.
+
+Developer:
+    Nikhil Rana
+
+Project:
+    NestorBird Engineering Internship Assignment
 """
 
 import os
@@ -16,10 +21,17 @@ load_dotenv()
 
 
 
+APP_NAME = "AI Text Summarizer"
+
+APP_VERSION = "1.0.0"
+
+DEVELOPER = "Nikhil Rana"
+
+
+
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
-
-
+AI_PROVIDER = "Groq"
 
 MODEL_NAME = "llama-3.3-70b-versatile"
 
@@ -29,34 +41,22 @@ MAX_TOKENS = 250
 
 
 
-
 MIN_WORDS = 1
 
-MAX_CHARACTERS = 5000
+MAX_CHARACTERS = 10000
 
+
+
+SUMMARY_STYLES = [
+    "Standard",
+    "Short",
+    "Detailed",
+    "Executive",
+]
 
 
 AVERAGE_READING_SPEED = 200
 
 
 
-
-APP_NAME = "AI Text Summarizer | Groq AI"
-
-APP_VERSION = "1.0.0"
-
-DEVELOPER = "Nikhil Rana"
-
-
-
-DOWNLOAD_FILE_NAME = "AI_Summary.txt"
-
-
-
-
-SUMMARY_STYLES = (
-    "Standard",
-    "Short",
-    "Detailed",
-    "Executive",
-)
+DOWNLOAD_FILE_NAME = "AI_Text_Summary.txt"

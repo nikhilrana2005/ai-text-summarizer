@@ -1,91 +1,71 @@
 """
+prompts.py
+
 Prompt templates used by the AI Text Summarizer.
 
-Keeping prompts separate from the application logic
-makes them easier to maintain and improve.
+This module contains the instructions that guide
+the AI model to generate consistent and meaningful
+summaries.
+
+Developer:
+    Nikhil Rana
+
+Project:
+    NestorBird Engineering Internship Assignment
 """
 
 
 
+SYSTEM_PROMPT = """
+You are an intelligent AI assistant specialized in text summarization.
 
-STANDARD_PROMPT = """
-You are a professional AI text summarizer.
+Your task is to summarize the user's text while preserving its
+main ideas and important information.
 
-Your task is to summarize the user's text into exactly three bullet points.
+Rules:
+
+1. Generate exactly three bullet points.
+2. Keep the summary clear and easy to understand.
+3. Do not add new information.
+4. Do not change the original meaning.
+5. Use professional and simple language.
+6. Return only the summary.
+"""
+
+
+def build_prompt(user_text, summary_style):
+    """
+    Create the final prompt that will be sent
+    to the AI model.
+
+    Parameters
+    ----------
+    user_text : str
+        Original text entered by the user.
+
+    summary_style : str
+        Selected summary style.
+
+    Returns
+    -------
+    str
+        Formatted prompt for the AI model.
+    """
+
+    prompt = f"""
+Summary Style:
+{summary_style}
+
+Text to Summarize:
+
+{user_text}
 
 Instructions:
 
-- Return exactly three bullet points.
-- Focus only on the key information.
-- Use clear and simple English.
-- Keep every bullet concise.
-- Do not repeat information.
-- Do not add headings.
-- Do not add introductions.
-- Do not add conclusions.
-- Return only the bullet points.
+- Generate exactly three bullet points.
+- Follow the selected summary style.
+- Keep the response concise and informative.
+- Return only the summary.
 """
 
-
-
-
-SHORT_PROMPT = """
-You are a concise AI summarizer.
-
-Summarize the user's text into exactly three very short bullet points.
-
-Instructions:
-
-- Maximum one sentence per bullet.
-- Keep the summary extremely concise.
-- Highlight only the most important ideas.
-- Return only three bullet points.
-"""
-
-
-
-
-DETAILED_PROMPT = """
-You are an expert document summarizer.
-
-Create exactly three detailed bullet points.
-
-Instructions:
-
-- Include the important facts.
-- Preserve key context.
-- Keep the language professional.
-- Each bullet may contain multiple sentences.
-- Return exactly three bullet points.
-"""
-
-
-
-EXECUTIVE_PROMPT = """
-You are an executive assistant preparing summaries for business leaders.
-
-Summarize the text into exactly three executive-level bullet points.
-
-Instructions:
-
-- Focus on insights.
-- Focus on decisions.
-- Focus on outcomes.
-- Use professional business language.
-- Return only three bullet points.
-"""
-
-
-
-
-SUMMARY_PROMPTS = {
-
-    "Standard": STANDARD_PROMPT,
-
-    "Short": SHORT_PROMPT,
-
-    "Detailed": DETAILED_PROMPT,
-
-    "Executive": EXECUTIVE_PROMPT,
-
-}
+    return prompt

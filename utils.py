@@ -1,161 +1,149 @@
 """
-Utility functions used throughout the AI Text Summarizer.
+utils.py
 
-This module contains helper functions for:
+Utility functions used throughout the
+AI Text Summarizer application.
 
-- Word counting
-- Character counting
-- Reading time estimation
-- Compression calculation
-- Reading time saved
-- User input validation
+Developer:
+    Nikhil Rana
+
+Project:
+    NestorBird Engineering Internship Assignment
 """
 
-import re
-
-from config import (
-    AVERAGE_READING_SPEED,
-)
 
 
-
-def count_words(text: str) -> int:
+def count_words(text):
     """
-    Return the total number of words.
-    """
+    Count the total number of words.
 
-    if not text.strip():
-        return 0
+    Parameters:
+        text (str): User input text.
+
+    Returns:
+        int: Total word count.
+    """
 
     return len(text.split())
 
 
 
-
-def count_characters(text: str) -> int:
+def count_characters(text):
     """
-    Return the total number of characters.
+    Count the total number of characters.
+
+    Parameters:
+        text (str): User input text.
+
+    Returns:
+        int: Character count.
     """
 
     return len(text)
 
 
 
-
-def estimate_reading_time(text: str) -> int:
+def estimate_reading_time(text):
     """
     Estimate reading time in minutes.
 
     Average reading speed:
     200 words per minute.
+
+    Parameters:
+        text (str): User input text.
+
+    Returns:
+        int: Estimated reading time.
     """
 
     words = count_words(text)
 
-    if words == 0:
-        return 0
-
-    return max(
-        1,
-        round(words / AVERAGE_READING_SPEED)
-    )
+    return max(1, round(words / 200))
 
 
 
-
-def calculate_compression(
-    original_text: str,
-    summary_text: str,
-) -> int:
+def calculate_compression(original_text, summary):
     """
-    Calculate compression percentage.
+    Calculate how much the text
+    was compressed after summarization.
+
+    Parameters:
+        original_text (str)
+        summary (str)
+
+    Returns:
+        int: Compression percentage.
     """
 
     original_words = count_words(original_text)
-
-    summary_words = count_words(summary_text)
+    summary_words = count_words(summary)
 
     if original_words == 0:
         return 0
 
     compression = (
-        1 -
-        (summary_words / original_words)
+        (original_words - summary_words)
+        / original_words
     ) * 100
 
     return round(compression)
 
 
 
-
-def reading_time_saved(
-    original_text: str,
-    summary_text: str,
-) -> int:
+def reading_time_saved(original_text, summary):
     """
-    Calculate estimated reading
-    time saved in minutes.
+    Estimate reading time saved.
+
+    Parameters:
+        original_text (str)
+        summary (str)
+
+    Returns:
+        int: Minutes saved.
     """
 
-    original_time = estimate_reading_time(
-        original_text
-    )
+    original_time = estimate_reading_time(original_text)
 
-    summary_time = estimate_reading_time(
-        summary_text
-    )
+    summary_time = estimate_reading_time(summary)
 
-    saved = original_time - summary_time
-
-    return max(saved, 0)
-
+    return max(0, original_time - summary_time)
 
 
 
 def validate_input(
-    text: str,
-    minimum_words: int,
-    maximum_characters: int,
+    text,
+    minimum_words,
+    maximum_characters,
 ):
     """
-    Validate user input.
+    Validate the user's input.
+
+    Parameters:
+        text (str)
+        minimum_words (int)
+        maximum_characters (int)
 
     Returns:
-        None -> Valid input
-
-        String -> Error message
+        str | None
     """
 
     if not text.strip():
+
         return "Please enter some text."
 
     if count_words(text) < minimum_words:
+
         return (
             f"Please enter at least "
             f"{minimum_words} words."
         )
 
     if count_characters(text) > maximum_characters:
+
         return (
-            f"Maximum allowed characters "
-            f"are {maximum_characters}."
+            f"Input exceeds the maximum limit of "
+            f"{maximum_characters} characters."
         )
 
     return None
-
-
-
-
-def clean_text(text: str) -> str:
-    """
-    Remove extra spaces and
-    unnecessary blank lines.
-    """
-
-    text = re.sub(
-        r"\s+",
-        " ",
-        text,
-    )
-
-    return text.strip()
