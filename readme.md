@@ -1,5 +1,5 @@
 # 📝 AI Text Summarizer
-![Python](https://img.shields.io/badge/Python- 3.12.10-blue)
+![Python](https://img.shields.io/badge/Python-3.12.10-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
 ![Groq](https://img.shields.io/badge/AI-Groq-orange)
 ![Llama](https://img.shields.io/badge/Model-Llama%203.3-green)
