@@ -18,9 +18,6 @@ from config import (
 )
 
 
-# ----------------------------------------------------
-# Count Words
-# ----------------------------------------------------
 
 def count_words(text: str) -> int:
     """
@@ -33,9 +30,7 @@ def count_words(text: str) -> int:
     return len(text.split())
 
 
-# ----------------------------------------------------
-# Count Characters
-# ----------------------------------------------------
+
 
 def count_characters(text: str) -> int:
     """
@@ -45,9 +40,7 @@ def count_characters(text: str) -> int:
     return len(text)
 
 
-# ----------------------------------------------------
-# Estimate Reading Time
-# ----------------------------------------------------
+
 
 def estimate_reading_time(text: str) -> int:
     """
@@ -68,9 +61,7 @@ def estimate_reading_time(text: str) -> int:
     )
 
 
-# ----------------------------------------------------
-# Calculate Compression
-# ----------------------------------------------------
+
 
 def calculate_compression(
     original_text: str,
@@ -95,9 +86,7 @@ def calculate_compression(
     return round(compression)
 
 
-# ----------------------------------------------------
-# Reading Time Saved
-# ----------------------------------------------------
+
 
 def reading_time_saved(
     original_text: str,
@@ -121,9 +110,7 @@ def reading_time_saved(
     return max(saved, 0)
 
 
-# ----------------------------------------------------
-# Validate User Input
-# ----------------------------------------------------
+
 
 def validate_input(
     text: str,
@@ -157,9 +144,7 @@ def validate_input(
     return None
 
 
-# ----------------------------------------------------
-# Clean Extra Spaces
-# ----------------------------------------------------
+
 
 def clean_text(text: str) -> str:
     """
