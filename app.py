@@ -629,4 +629,16 @@ if st.session_state.summary:
     )
 
     st.markdown("---")
+
+st.markdown("---")
+
+st.caption(f"{APP_NAME} • Version {APP_VERSION}")
+
+st.caption(
+    f"Powered by {AI_PROVIDER} • {MODEL_NAME}"
+)
+
+st.caption(
+    f"Developed by {DEVELOPER}"
+)
     
