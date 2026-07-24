@@ -11,9 +11,6 @@ Project:
 NestorBird Engineering Internship Assignment
 """
 
-# ----------------------------------------------------
-# Imports
-# ----------------------------------------------------
 
 import time
 
@@ -40,9 +37,7 @@ from config import (
 )
 
 
-# ----------------------------------------------------
-# Page Configuration
-# ----------------------------------------------------
+
 
 st.set_page_config(
     page_title=APP_NAME,
@@ -51,9 +46,6 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ----------------------------------------------------
-# Sidebar
-# ----------------------------------------------------
 
 with st.sidebar:
 
@@ -120,9 +112,6 @@ with st.sidebar:
 
     st.caption(f"Developed by {DEVELOPER}")
     
-# ----------------------------------------------------
-# About Page
-# ----------------------------------------------------
 
 if page == "ℹ️ About":
 
@@ -161,9 +150,7 @@ This project demonstrates:
 
     st.stop()
     
-    # ----------------------------------------------------
-# How To Use
-# ----------------------------------------------------
+ 
 
 if page == "📖 How To Use":
 
@@ -208,9 +195,7 @@ and download it if needed.
 
     st.stop()
     
-    # ----------------------------------------------------
-# Home Page
-# ----------------------------------------------------
+
 
 st.title("📝 AI Text Summarizer")
 
@@ -221,9 +206,7 @@ st.caption(
 st.markdown("---")
 
 
-# ----------------------------------------------------
-# Hero Section
-# ----------------------------------------------------
+
 
 left_column, right_column = st.columns([3, 1])
 
@@ -248,9 +231,7 @@ of the original text.
 
 st.markdown("---")
 
-# ----------------------------------------------------
-# Session State
-# ----------------------------------------------------
+
 
 if "user_text" not in st.session_state:
 
@@ -271,9 +252,6 @@ if "processing_time" not in st.session_state:
 
     st.session_state.processing_time = 0
     
-    # ----------------------------------------------------
-# Summary Settings
-# ----------------------------------------------------
 
 st.subheader("⚙️ Summary Settings")
 
@@ -333,10 +311,7 @@ if not user_text:
     )
     
 
-    
-# ----------------------------------------------------
-# Text Statistics Dashboard
-# ----------------------------------------------------
+
 
 st.markdown("---")
 
@@ -372,9 +347,7 @@ with metric3:
     )
 
 
-# ----------------------------------------------------
-# Character Limit Warning
-# ----------------------------------------------------
+
 
 usage = (
     total_characters /
@@ -387,9 +360,7 @@ if usage >= 0.90:
         "⚠️ You are approaching the maximum character limit."
     )
 
-# ----------------------------------------------------
-# Input Quality
-# ----------------------------------------------------
+
 
 st.markdown("### 🎯 Input Quality")
 
@@ -406,25 +377,6 @@ else:
     st.success(
         "Excellent input. The AI has sufficient context to generate a detailed summary."
     )
-    
-# ----------------------------------------------------
-# # Current Summary Style
-# # ----------------------------------------------------
-
-# st.markdown("### ⚙ Current Configuration")
-
-# st.info(
-#     f"""
-# **Selected Style:** {summary_style}
-
-# The AI will generate a **{summary_style}**
-# summary containing **exactly three bullet points.**
-# """
-# )
-
-# ----------------------------------------------------
-# Action Buttons
-# ----------------------------------------------------
 
 st.markdown("---")
 
@@ -445,9 +397,6 @@ with button2:
         use_container_width=True,
     )
     
-# ----------------------------------------------------
-# Generate Summary
-# ----------------------------------------------------
 
 if generate:
 
@@ -502,9 +451,7 @@ if generate:
             f"❌ {error}"
         )
 
-# ----------------------------------------------------
-# Empty State
-# ----------------------------------------------------
+
 
 if not st.session_state.summary:
 
@@ -512,9 +459,7 @@ if not st.session_state.summary:
         "👆 Your generated summary will appear here."
     )
     
-# ----------------------------------------------------
-# Success Notification
-# ----------------------------------------------------
+
 
 if st.session_state.summary:
 
@@ -530,9 +475,7 @@ if st.session_state.summary:
 
     st.markdown(...)
     
-# ----------------------------------------------------
-# Display Summary
-# ----------------------------------------------------
+
 
 if st.session_state.summary:
 
@@ -548,10 +491,6 @@ if st.session_state.summary:
         st.session_state.summary
     )
     
-# ----------------------------------------------------
-# Summary Analytics
-# ----------------------------------------------------
-
     summary_words = count_words(
         st.session_state.summary
     )
@@ -566,9 +505,7 @@ if st.session_state.summary:
         st.session_state.summary,
     )
 
-# ----------------------------------------------------
-# Summary Metrics
-# ----------------------------------------------------
+
 
     st.markdown("### 📊 Summary Analytics")
 
@@ -602,9 +539,7 @@ if st.session_state.summary:
             f"{st.session_state.processing_time} sec"
         )
         
-# ----------------------------------------------------
-# Download Summary
-# ----------------------------------------------------
+
 
     st.download_button(
 
@@ -619,9 +554,7 @@ if st.session_state.summary:
         use_container_width=True,
     )
 
-# ----------------------------------------------------
-# Summary Quality Indicator
-# ----------------------------------------------------
+
 
     if compression >= 70:
 
@@ -641,9 +574,7 @@ if st.session_state.summary:
             "ℹ️ The generated summary is relatively detailed."
         )
         
-# ----------------------------------------------------
-# Recent Summaries
-# ----------------------------------------------------
+
 
     if st.session_state.history:
 
@@ -672,9 +603,6 @@ st.write(f"📄 Summaries Generated: {len(st.session_state.history)}")
 
 st.write(f"⚙ Version: {APP_VERSION}")
 
-# ----------------------------------------------------
-# Recent Summary History
-# ----------------------------------------------------
 
 if st.session_state.history:
 
