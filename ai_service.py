@@ -25,18 +25,14 @@ from prompts import SUMMARY_PROMPTS
 from utils import clean_text
 
 
-# ----------------------------------------------------
-# Initialize Groq Client
-# ----------------------------------------------------
+
 
 client = Groq(
     api_key=GROQ_API_KEY
 )
 
 
-# ----------------------------------------------------
-# Generate Summary
-# ----------------------------------------------------
+
 
 def generate_summary(
     user_text: str,
