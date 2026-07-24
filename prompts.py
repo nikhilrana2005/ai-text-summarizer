@@ -6,9 +6,7 @@ makes them easier to maintain and improve.
 """
 
 
-# ----------------------------------------------------
-# Standard Summary
-# ----------------------------------------------------
+
 
 STANDARD_PROMPT = """
 You are a professional AI text summarizer.
@@ -29,9 +27,7 @@ Instructions:
 """
 
 
-# ----------------------------------------------------
-# Short Summary
-# ----------------------------------------------------
+
 
 SHORT_PROMPT = """
 You are a concise AI summarizer.
@@ -47,9 +43,7 @@ Instructions:
 """
 
 
-# ----------------------------------------------------
-# Detailed Summary
-# ----------------------------------------------------
+
 
 DETAILED_PROMPT = """
 You are an expert document summarizer.
@@ -66,9 +60,6 @@ Instructions:
 """
 
 
-# ----------------------------------------------------
-# Executive Summary
-# ----------------------------------------------------
 
 EXECUTIVE_PROMPT = """
 You are an executive assistant preparing summaries for business leaders.
@@ -85,9 +76,7 @@ Instructions:
 """
 
 
-# ----------------------------------------------------
-# Prompt Mapping
-# ----------------------------------------------------
+
 
 SUMMARY_PROMPTS = {
 
