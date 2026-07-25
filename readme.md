@@ -160,12 +160,17 @@ Follow the steps below to run the project on your local machine.
 
 ```bash
 git clone https://github.com/nikhilrana2005/ai-text-summarizer.git 
+```
+
+## 2. Navigate to the Project Directory
+
+```bash
 cd ai-text-summarizer
 ```
 
 ---
 
-## 2. Create a Virtual Environment
+## 3. Create a Virtual Environment
 
 ```bash
 python -m venv venv
@@ -187,7 +192,7 @@ source venv/bin/activate
 
 ---
 
-## 3. Install Dependencies
+## 4. Install Dependencies
 
 Install all required Python packages using the following command:
 
@@ -197,7 +202,7 @@ pip install -r requirements.txt
 
 ---
 
-## 4. Configure Environment Variables
+## 5. Configure Environment Variables
 
 Create a file named `.env` in the project root directory and add your Groq API key.
 
@@ -220,7 +225,7 @@ GROQ_API_KEY=your_api_key_here
 
 
 ```
-## 5. Run the Application
+## 6. Run the Application
 
 Start the Streamlit application.
 
