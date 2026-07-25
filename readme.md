@@ -205,6 +205,21 @@ Create a file named `.env` in the project root directory and add your Groq API k
 GROQ_API_KEY=your_api_key_here
 ```
 
+## 🔑 Get Your Groq API Key
+
+To use this application, you need a free Groq API key.
+
+1. Visit the official Groq Console:
+   https://console.groq.com/
+
+2. Sign in or create a free account.
+
+3. Generate a new API key.
+
+4. Create a `.env` file in the project folder and add:
+
+```env
+GROQ_API_KEY=your_api_key_here
 ---
 
 ## 5. Run the Application
