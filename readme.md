@@ -202,8 +202,6 @@ pip install -r requirements.txt
 Create a file named `.env` in the project root directory and add your Groq API key.
 
 
-```
-
 ## 🔑 Get Your Groq API Key
 
 To use this application, you need a free Groq API key.
