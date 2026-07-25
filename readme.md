@@ -136,8 +136,6 @@ The project uses a small set of libraries to keep the application lightweight an
 - `streamlit`
 - `groq`
 - `python-dotenv`
-- `os`
-- `time`
 
 These libraries work together to provide the user interface, AI integration, configuration management, and application functionality.
 
